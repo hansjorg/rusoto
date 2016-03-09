@@ -40,7 +40,7 @@ use rusoto::dynamodb::{DynamoDBClient, ListTablesInput};
 use rusoto:regions::Region;
 
 fn main() {
-  let provider = DefaultAWSCredentialsProviderChain::new();
+  let provider = DefaultAWSCredentialsProviderChain::new().unwrap();
   let region = Region::UsEast1;
   let mut client = DynamoDBClient::new(provider, &region);
   let list_tables_input: ListTablesInput = Default::default();

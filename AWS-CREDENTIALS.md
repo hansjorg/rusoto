@@ -13,14 +13,14 @@ If all possibilites are exhausted, an error will be returned.
 `ProfileCredentialsProvider` (and `DefaultAWSCredentialsProviderChain`) also allow you to specify a custom path to the credentials file and the name of the profile to use.
 If not specified, the profile "default" is used.
 
-It's also possible to implement your own credentials sourcing mechanism by creating a type that implements `rusoto::credentials::AWSCredentialsProvider`.
+It's also possible to implement your own credentials sourcing mechanism by creating a type that implements `rusoto::credentials::ProvideAWSCredentials`.
 
 #### Credential refreshing
 
-Credentials obtained from environment variables and credential files expire ten minutes after being acquired and are refreshed on subsequent calls to `get_credentials()` (a method from the `AWSCredentialsProvider` trait).
+Credentials obtained from environment variables and credential files expire ten minutes after being acquired and are refreshed on subsequent calls to `credentials()` (a method from the `ProvideAWSCredentials` trait).
 
 IAM instance profile credentials are refreshed as needed.
-Upon calling `get_credentials()` it will see if they are expired or not.
+Upon calling `credentials()` it will see if they are expired or not.
 If expired, it attempts to get new credentials from the metadata service.
 If that fails it will return an error.
 IAM credentials expiration time comes from the IAM metadata response.
